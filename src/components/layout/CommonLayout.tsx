@@ -6,9 +6,9 @@ import HomeComponent from '../home/HomeComponent'
 function CommonLayout() {
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
     <HomeComponent/>
-    <Footer/>
+    {/* <Footer/> */}
     </>
   )
 }

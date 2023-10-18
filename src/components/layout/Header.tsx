@@ -310,7 +310,7 @@ export default function Header() {
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     d="M4 6h16M4 12h16M4 18h16"
-                  />
+                  />           
                 </svg>
                 <p>Menu</p>
               </div>

@@ -46,6 +46,10 @@ function HomeComponent() {
     ]
     return (
         <div>
+            <div className='h-[80px] w-full flex justify-center items-center flex-col bg-blue-950 text-white'>
+                <h1 className='font-bold'>EXTRA 15% OFF ON ORDERS ABOVE $3499</h1>
+                <p className='text-sm'>Discount auto-applied at checkout</p>
+            </div>
             <div className='relative'>
                 <img src={homeimages[0].img} alt="Image 1" className='bg-cover w-full mb-6'></img>
                 <div className='absolute top-[30%] lg:left-[50px] flex flex-col justify-center items-center'>
@@ -158,12 +162,12 @@ function HomeComponent() {
                     </div>
                 </div>
             </div>
-            <div className='lg:mt-[120px] mt-[300px] lg:mb-[70px]'>
+            <div className='lg:mt-[120px] mt-[360px] lg:mb-[70px]'>
                 <div className='absolute w-full h-full'>
                 <img src={homeimages[6].img} alt="image 7" className='w-full h-[500px]'></img>
                 </div>
                 <div className='relative'>
-                <div className='flex flex-col items-center text-white'>
+                <div className='flex flex-col justify-center items-center pt-[10%] text-white'>
                     <h1 className='lg:text-4xl text-2xl font-bold'>FENTY x PUMA</h1>
                     <h1 className='lg:text-3xl tex-xl'>NEW AVANTI DROP COMING SOON</h1>
                     <button className='border border-black bg-black text-white px-4 py-3 m-4'>

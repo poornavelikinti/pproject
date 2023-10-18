@@ -3,6 +3,8 @@ import React from 'react'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import CommonLayout from '../components/layout/CommonLayout'
+import Header from '../components/layout/Header'
+import Footer from '../components/layout/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,9 +16,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <CommonLayout/>
+      <Header/>
       <body className="bg-white">{children}</body>
-      
+      <Footer/>
     </html>
   )
 }
