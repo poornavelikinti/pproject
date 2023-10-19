@@ -10,6 +10,7 @@ export default function Header() {
   const [dropOpenStates, setDropOpenStates] = useState({});
   const [textContent, setTextContent] = useState(0);
 
+
   const toggleDropOpen = (navlink) => {
     setDropOpenStates((prevStates) => ({
       ...prevStates,
@@ -19,6 +20,7 @@ export default function Header() {
   let navbardetails = [
     {
       "navlink": "New", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "Launch Calender",
         "Subcategory": [{ "type": "Terrace" }, { "type": "#PUMADive" }, { "type": "PUMAxRIPNDIP" }, { "type": "PUMAxWINTER RINK" }, { "type": "PUMAxRHUIGI" }, { "type": "Anushka's Favourite Fits" }, { "type": "PUMAxTHE SUMRFS" }, { "type": "Mancity 23/24 Kit" }, { "type": "Nitro Collection" }, { "type": "PUMA 75 YEARS" }
@@ -38,6 +40,7 @@ export default function Header() {
       ]
     }, {
       "navlink": "Women", "menu": "true",
+      "link":"../products/cards/ProductCard",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "New & Trending" }, { "type": "#PUMADive" }, { "type": "Softride" }, { "type": "Terrace" }, { "type": "Anushka's Favourite Fits" }, { "type": "Nitro Running" }, { "type": "Curated by Shanaya" }, { "type": "Sports Bras" }, { "type": "Maternity Clothing" }, { "type": "Sustainable Collection" }
@@ -66,6 +69,7 @@ export default function Header() {
     },
     {
       "navlink": "Men", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "New & Trending" }, { "type": "#PUMADive" }, { "type": "Terrace" }, { "type": "Nitro Running" }, { "type": "Motorsport" }, { "type": "Softride" }, { "type": "Sustainable Collection" }
@@ -94,6 +98,7 @@ export default function Header() {
     },
     {
       "navlink": "Kids", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "New & Trending" }, { "type": "School Store" }, { "type": "Shoes Under $3000" }, { "type": "Clothing under $1000" }, { "type": "Vacay Queen" }, { "type": "Puma Mates" }, { "type": "Motorsport" }, { "type": "Essentials" }, { "type": "one8" }
@@ -121,7 +126,8 @@ export default function Header() {
       ]
     },
     {
-      "navlink": "FENTYxPUMA"
+      "navlink": "FENTYxPUMA",
+      "link":"",
     },
     {
       "navlink": "Motorsport", "menu": "true",
@@ -138,6 +144,7 @@ export default function Header() {
     },
     {
       "navlink": "Collaborations", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "Select",
         "Subcategory": [{ "type": "PUMAxDAPPER DAN" }, { "type": "PUMAxRHUIGI" }, { "type": "MMQ" }, { "type": "PUMAxWINTER RINK" }, { "type": "PUMAxSPONGEBOB | KIDS" }]
@@ -148,6 +155,7 @@ export default function Header() {
     },
     {
       "navlink": "Sports", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "Running",
         "Subcategory": [{ "type": "Running Store" }, { "type": "Everyday Running" }, { "type": "5-10km Running" }, { "type": "Long Distance Running" }, { "type": "Clothing" }, { "type": "Accessories" }, { "type": "Nitro Collection" }, { "type": "First Mile" }, { "type": "Seasons Collection" }]
@@ -167,6 +175,7 @@ export default function Header() {
     },
     {
       "navlink": "Outlet", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "Shop All Outlet" }, { "type": "Sport Shoes from $1799" }, { "type": "Motorsport Starting from $999" }, { "type": "Everything under $1000" }, { "type": "New to Outlet" }]
@@ -194,20 +203,19 @@ export default function Header() {
     "FREE DELIVERIES.FREE RETURNS",
     "CATCH THE #PUMADive CLICK TO KNOW MORE"
   ]
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTextContent((prevIndex) => (prevIndex + 1) % arr.length);
-    }, 3000);
-    return () => clearInterval(interval)
-  }, [])
 
-  const text = arr[textContent]
+  // setInterval(() => {
+  //   setTextContent((prevIndex) => (prevIndex + 1) % arr.length);
+  // }, 3000);
+
+  // const text = arr[textContent];
+
   return (
 
     <div className="sticky top-0 z-20">
       <header className="m-0">
         <div className="text-sm lg:text-lg flex justify-center items-center align-middle p-2 h-10 bg-yellow-600">
-          <p className="text-center">{text}</p>
+          <p className="text-center">EXTRA 5% INSTANT DISCOUNT FOR ALL ONLINE PAYMENTS</p>
         </div>
         <nav className="flex bg-black text-white">
           <Link href='' className='m-4 '>
@@ -217,10 +225,17 @@ export default function Header() {
           <div className="hidden lg:block">
             <div className="flex items-center z-30 justify-center lg-flex-row text-lg pt-2">
               {
-                navbardetails.map((nav, item) => (
+                navbardetails.map((nav, index) => {
+                  (nav.link==undefined?"not":(console.log(nav.link,"nsmd")));
+                  
+                  return(
                   <div>
                     <div className="flex items-center z-30 justify-center relative lg-flex-row text-l me-3 group">
-                      <Link href='' className="p-4 text-xl">{nav.navlink}</Link>
+                      <div className="pt-5">
+                      {
+                    (nav.link==undefined?" ":(<Link href={nav.link} className="p-4 pt-4 text-xl">{nav.navlink}</Link>))
+                }
+                </div>
 
                       {nav.menu && (
                         <div className="hidden group-hover:block hover:block transition-all duration-75">
@@ -268,7 +283,7 @@ export default function Header() {
                       }
                     </div>
                   </div>
-                ))
+                )})
               }
             </div>
           </div>
