@@ -18,7 +18,12 @@ module.exports = {
         '2/3': '66.6667%',
         '3/4': '75%',
       },
+      borderColor: {
+        'e-4': '#your-custom-border-color',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+],
 }

@@ -4,11 +4,13 @@ import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineClose } from "react-icon
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-
+import 'tw-elements';
+import { Dropdown } from "tw-elements";
 import Filter from "./Filter";
-
+import Link from "next/link";
 import { products } from "../ProductsData";
 import CommonProductPage from "../../PLP/CommonProductPage";
+
 
 
 export default function ProductCard() {
@@ -20,10 +22,16 @@ export default function ProductCard() {
     const [colordropopen, setcolordropopen] = useState(false);
     const [activedropopen, setactivedropopen] = useState(false);
     const [collabdropopen, setcollabdropopen] = useState(false);
-    const [discountdropopen,setdiscountdropopen]=useState(false)
+    const [discountdropopen, setdiscountdropopen] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [mobileview, setmobileview] = useState(false)
     const [closebtn, setclosebtn] = useState(true);
+    const [Open, setOpen] = useState(false);
+
+  const togglesortDropdown = () => {
+    setOpen(!Open);
+  };
+  
 
     const toggleDropdown = (dropdownType) => {
         // Closing dropdowns
@@ -68,14 +76,14 @@ export default function ProductCard() {
                     </div>
                     {!mobileview ? (
                         <div className={` lg:flex items-center ${isOpen ? "block" : "hidden"}`}>
-                            <div className="ms-5 me-4">
+                            <div className="ms-[40px] me-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                                 </svg>
 
                             </div>
                             <div className="relative block p-2 lg:inline-block">
-                                <button onClick={() => toggleDropdown('category')} className="flex  lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  items-center text-black hover:text-white hover:bg-black">
+                                <button onClick={() => toggleDropdown('category')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">
                                     Category
                                     {!catdropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
@@ -84,11 +92,11 @@ export default function ProductCard() {
                                     )}
                                 </button>
                                 {catdropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 w-full z-40 lg:w-36 h-22 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                    <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 text-black absolute m-2 lg:border lg:border-slate-300 z-40 lg:w-[200px] h-22 p-1 flex flex-col text-md items-start bg-white font-bold">
                                         {Array.from(new Set(products.map((product) => product.category))).map((category, index) => (
                                             <div className="flex text-sm p-0.25 m-3 z-20 whitespace-nowrap" key={index}>
-                                                <input type="checkbox" value={category}></input>
-                                                <label>
+                                                <input type="checkbox" value={category} className="w-5 h-5"></input>
+                                                <label className="ms-4">
                                                     {category}
                                                 </label>
                                             </div>
@@ -96,79 +104,77 @@ export default function ProductCard() {
                                     </div>
                                 )}
                             </div>
-                            <div className="relative block p-2 lg:flex lg:justify-between lg:items-center">
-                                <button onClick={() => toggleDropdown('producttype')} className="flex lg:border lg:border-slate-300 my-[15px]  lg:px-[25px] text-md lg:py-2 h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Product Type
+                            <div className="relative block p-2 lg:inline-block">
+                                <button onClick={() => toggleDropdown('producttype')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Product Type
                                     {!prodropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
                                     }
                                 </button>
                                 {prodropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-40 p-1 flex flex-col text-md items-start bg-white font-bold">
-                                        <div className="">
-                                            {Array.from(new Set(products.map((product) => product.prodcuttype))).map((prodcuttype, index) => (
-                                                <div className="flex text-sm p-0.25 m-3 whitespace-nowrap" key={index}>
-                                                    <input type="checkbox" value={prodcuttype}></input>
-                                                    <label>
-                                                        {prodcuttype}
-                                                    </label>
-                                                </div>
-                                            ))}
+                                    <div className="overflow-y-scroll scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 text-black absolute m-2 lg:border lg:border-slate-300 z-40 lg:w-[300px] h-22 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                    {Array.from(new Set(products.map((product) => product.prodcuttype))).map((producttype, index) => (
+                                        <div className="flex text-sm p-0.25 m-3 z-20 whitespace-nowrap" key={index}>
+                                            <input type="checkbox" value={producttype} className="w-5 h-5"></input>
+                                            <label className="ms-4">
+                                                {producttype}
+                                            </label>
                                         </div>
-                                    </div>
+                                    ))}
+                                </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('prize')} className="flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Prize
+                                <button onClick={() => toggleDropdown('prize')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Price
                                     {!prizedropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
                                     }
                                 </button>
                                 {prizedropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-99 p-1 flex  flex-col text-md items-start bg-white font-bold">
+                                    <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 text-black absolute lg:w-[250px] m-2 lg:border lg:border-slate-300 z-100 p-1 flex flex-col text-md items-start bg-white font-bold">
                                         <div className="">
                                             {Array.from(new Set(products.map((product) => product.prize))).map((prize, index) => (
-                                                <div className="flex text-sm p-0.25 m-3 whitespace-nowrap" key={index}>
-                                                    <input type="radio" value={prize}></input>
-                                                    <label>
+                                                <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
+                                                    <input type="radio" value={prize} className="w-5 h-5"></input>
+                                                    <label className="ms-4">
                                                         {prize}
                                                     </label>
                                                 </div>
                                             ))}
-                                        </div>
+                                        </div> 
                                     </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('gender')} className="flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  text-black items-center hover:text-white hover:bg-black">Gender
+                                <button onClick={() => toggleDropdown('gender')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Gender
                                     {!gendropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
                                     }
                                 </button>
                                 {gendropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-30 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                    <div className=" text-black absolute lg:border lg:w-[150px] m-2 lg:border-slate-300 z-30 p-1 flex flex-col text-md items-start bg-white font-bold">
                                         {Array.from(new Set(products.map((product) => product.gender))).filter(Boolean).map((gender, index) => (
-                                            <div className="flex text-sm p-0.25 m-3 whitespace-nowrap" key={index}>
-                                                <input type="radio" value={gender}></input>
-                                                <label>
-                                                    {gender}
-                                                </label>
-                                            </div>
+                                            <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
+                                            <input type="radio" value={gender} className="w-5 h-5"></input>
+                                            <label className="ms-4">
+                                                {gender}
+                                            </label>
+                                        </div>
                                         ))}
                                     </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('size')} className=" flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  text-black items-center hover:text-white hover:bg-black">Size
+                                <button onClick={() => toggleDropdown('size')} className=" flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Size
                                     {!sizedropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
                                     }
                                 </button>
                                 {sizedropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-20 p-1 flex text-md items-start whitespace-nowrap w-auto bg-white font-bold">
+                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-20 m-2 p-1 flex text-md whitespace-nowrap max-w-xl w-auto bg-white font-bold">
                                         {Array.from(new Set(products.map((product) => product.size))).filter(Boolean).map((size, index) => (
                                             <div className="border w-full  border-slate-500 hover:border-black hover:bg-black hover:text-white p-1 m-1">
                                                 <div className="flex flex-row text-sm p-0.25 m-3 " key={index}>
@@ -182,14 +188,14 @@ export default function ProductCard() {
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('color')} className="flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  text-black items-center hover:text-white hover:bg-black">Color
+                                <button onClick={() => toggleDropdown('color')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Color
                                     {!colordropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
                                     }
                                 </button>
                                 {colordropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-20 p-1 flex text-md items-start whitespace-nowrap w-auto bg-white font-bold">
+                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-20 m-2 p-1 flex text-md items-start whitespace-nowrap w-auto bg-white font-bold">
                                         {Array.from(new Set(products.map((product) => product.color))).filter(Boolean).map((color, index) => (
                                             <div className="flex flex-col items-center">
                                                 {color == "black" || color == "white" ? (
@@ -209,7 +215,7 @@ export default function ProductCard() {
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('active')} className="flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  text-black items-center hover:text-white hover:bg-black">Discount
+                                <button onClick={() => toggleDropdown('')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Discount
                                     {!discountdropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
@@ -218,42 +224,42 @@ export default function ProductCard() {
                                 {discountdropopen && (
                                     <div className=" text-black absolute lg:border lg:border-slate-300 z-20 p-1 flex flex-col text-md items-start bg-white font-bold">
                                         <div className="">
-                                            {Array.from(new Set(products.map((product) => product.activity))).filter(Boolean).map((activity, index) => (
-                                                <div className="flex text-sm p-1 m-3 whitespace-nowrap" key={index}>
-                                                    <input type="checkbox" value={activity}></input>
-                                                    <label>
-                                                        {activity}
-                                                    </label>
-                                                </div>
-                                            ))}
+                                            {/* {Array.from(new Set(products.map((product) => product))).filter(Boolean).map((activity, index) => (
+                                                // <div className="flex text-sm p-1 m-3 whitespace-nowrap" key={index}>
+                                                //     <input type="checkbox" value={}></input>
+                                                //     <label>
+                                                //         {activity}
+                                                //     </label>
+                                                // </div>
+                                            ))} */}
                                         </div>
                                     </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('active')} className="flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-2 h-11 font-bold  text-black items-center hover:text-white hover:bg-black">Activity
+                                <button onClick={() => toggleDropdown('active')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Activity
                                     {!activedropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
                                     }
                                 </button>
                                 {activedropopen && (
-                                    <div className=" text-black absolute lg:border lg:border-slate-300 z-20 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                    <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 max-h-[300px] text-black absolute lg:border lg:border-slate-300 z-20 m-2 p-1 flex flex-col text-md whitespace-nowrap max-w-xl w-auto bg-white font-bold">
+                                    {Array.from(new Set(products.map((product) => product.activity))).filter(Boolean).map((activity, index) => (
                                         <div className="">
-                                            {Array.from(new Set(products.map((product) => product.activity))).filter(Boolean).map((activity, index) => (
-                                                <div className="flex text-sm p-1 m-3 whitespace-nowrap" key={index}>
-                                                    <input type="checkbox" value={activity}></input>
-                                                    <label>
-                                                        {activity}
-                                                    </label>
-                                                </div>
-                                            ))}
+                                            <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
+                                            <input type="radio" value={activity} className="w-5 h-5"></input>
+                                            <label className="ms-4">
+                                                {activity}
+                                            </label>
                                         </div>
-                                    </div>
+                                        </div>
+                                    ))}
+                                </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
-                                <button onClick={() => toggleDropdown('collaborations')} className="flex lg:border lg:border-slate-300 my-[15px] lg:px-[25px] text-md lg:py-3 h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Collaborations and Category
+                                <button onClick={() => toggleDropdown('collaborations')} className="flex lg:border lg:border-slate-300 p-5 text-md h-11 font-bold  items-center text-black hover:text-white hover:bg-black">Collaborations & PartnerShips
                                     {!collabdropopen ? (
                                         <FontAwesomeIcon icon={faChevronDown} className="h-8 ms-2" />
                                     ) : <FontAwesomeIcon icon={faChevronUp} className="h-8 ms-2" />
@@ -264,14 +270,51 @@ export default function ProductCard() {
                     ) : <Filter />}
 
                 </div>
-                <select className="flex border border-slate-300 px-5 z-10 py-2 h-11 me-[20px]  font-bold m-3 text-black hover:text-white hover:bg-black">
-                    <option >SORT BY</option>
-                    <option>high to low</option>
-                    <option>low to high</option>
-                    <option>Newest</option>
-                </select>
+                <div className="relative" data-te-dropdown-ref>
+                    <button className="flex border border-slate-300 px-7 z-10 py-2 h-11 me-[20px] font-bold m-2 text-black"
+                        type="button"
+                        onClick={togglesortDropdown}
+                        aria-expanded={Open}
+                        data-te-ripple-init
+                        data-te-ripple-color="light">                   
+                        SORT BY
+                        <span className="ml-2 w-2">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                className="h-5 w-5">                          
+                                <path
+                                    fillRule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </span>
+                    </button>
+                    <ul className={`absolute m-1 mt-0 ${Open ? 'block' : 'hidden'} z-20 list-none overflow-hidden rounded-lg w-[161px] border-none bg-white`}>                
+                        <h6 className="block px-4 py-1 text-md font-semibold bg-sky-400">Sort by</h6>
+                        <li>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Discount High to Low</Link>
+                        </li>
+                        <li>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Best Matches</Link>
+                        </li>
+                        <li>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Top Sellers</Link>
+                        </li>
+                        <li>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Prices Low to High</Link>
+                        </li>
+                        <li>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Prices High to Low</Link>
+                        </li>
+                        <li>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Newest</Link>
+                        </li>
+                    </ul>
+                </div>
             </div>
-
             <CommonProductPage />
         </div>
 

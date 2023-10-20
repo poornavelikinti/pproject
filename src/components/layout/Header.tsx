@@ -218,8 +218,8 @@ export default function Header() {
           <p className="text-center">EXTRA 5% INSTANT DISCOUNT FOR ALL ONLINE PAYMENTS</p>
         </div>
         <nav className="flex bg-black text-white">
-          <Link href='' className='m-4 '>
-            <img src='https://e7.pngegg.com/pngimages/39/948/png-clipart-puma-logo-puma-logo-puma-logo-s-white-mammal.png' className='w-12 h-12 border rounded-full'></img>
+          <Link href='' className=' '>
+            <img src='https://assets.turbologo.com/blog/en/2019/11/19084917/puma-logo-cover.png' className='w-[60px] h-12 lg:w-[120px] lg:h-[60px] lg:mt-4 mt-2'></img>
           </Link>
 
           <div className="hidden lg:block">
@@ -230,7 +230,7 @@ export default function Header() {
                   
                   return(
                   <div>
-                    <div className="flex items-center z-30 justify-center relative lg-flex-row text-l me-3 group">
+                    <div className="flex items-center z-30 justify-center relative lg-flex-row text-l me-3 group hover:underline">
                       <div className="pt-5">
                       {
                     (nav.link==undefined?" ":(<Link href={nav.link} className="p-4 pt-4 text-xl">{nav.navlink}</Link>))

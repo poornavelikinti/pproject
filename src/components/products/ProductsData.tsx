@@ -10,7 +10,7 @@ export const products=[
             ], "rating": { "rate": 3.9, "count": 120 }
         },
         {
-            "id": 2, "price": 222.3, "Dprice": "200", "prize": "101-500", "color": "white", "activity": "Basketball", "size": "L", "prodcuttype": "Tshirts-Casual & Active", "gender": "Male", "title": "Mens Casual Premium Slim Fit T-Shirts ", "category": "Men's clothing", "pricetag": "-15%", "image": [
+            "id": 2, "price": 222.3, "Dprice": "200", "prize": "101-500", "color": "white", "activity": "Basketball", "size": "L", "prodcuttype": "Tshirts-Casual & Active", "gender": "Male", "title": "Mens Casual Premium Slim Fit T-Shirts ", "category": "Men's clothing", "image": [
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkwdWjtnaZzdRDl6Ia3MojUmJzd0WsjrvvXg&usqp=CAU",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBIXv-gpZG6CLImCnZU5w4DZ5be33oo3Lrvqp-mmZDkSJWFR2cI44FiSoHy3GxmCwtDe4&usqp=CAU",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxV1NOjAM1NaNbgxCLAmjPLnCz7fgcj_UvqA&usqp=CAU",

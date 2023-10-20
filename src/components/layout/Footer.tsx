@@ -282,6 +282,7 @@ export default function Footer() {
               </div>
             </Disclosure.Panel>
           </Disclosure>
+          <div className="mb-5">
           <div className='flex justify-center items-center border border-white bg-black m-6'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ROSg4ORJSViyKLTjn3Daz6k2CCRI9WafIA&usqp=CAU" className="h-10 w-10 rounded-full p-1"></img>
             <h1 className="text-white ">INDIA</h1>
@@ -308,6 +309,7 @@ export default function Footer() {
           <div className='text-white m-2'>
             <p>Puma alrights reserved</p>
           </div>
+        </div>
         </div>
         </div>
       </div >
