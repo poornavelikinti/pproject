@@ -21,6 +21,7 @@ module.exports = {
       borderColor: {
         'e-4': '#your-custom-border-color',
       },
+      display: ['group-hover']
     },
   },
   plugins: [

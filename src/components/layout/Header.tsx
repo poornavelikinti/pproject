@@ -1,26 +1,41 @@
 "use client"
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Popover } from "@headlessui/react";
+import { Popover, Transition } from "@headlessui/react";
 import { FiSearch } from "react-icons/fi";
-import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md"
+import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft } from "react-icons/md";
+// import { ProfileCard } from "../loginpage/LoginPage"
 
 
 export default function Header() {
-  const [dropOpenStates, setDropOpenStates] = useState({});
-  const [textContent, setTextContent] = useState(0);
+  const [ButtonHidden, setButtonHidden] = useState(true);
+  const Lastindex = (navLink, currentIndex) => {
+    currentIndex === (navLink.length - 1);
+  }
 
-
-  const toggleDropOpen = (navlink) => {
-    setDropOpenStates((prevStates) => ({
-      ...prevStates,
-      [navlink]: !prevStates[navlink],
+  const [Open, setOpen] = useState(false);
+  const [popoverStates, setPopoverStates] = useState({});
+  const togglePopover = (navlink, show = true) => {
+    setPopoverStates((prevState) => ({
+      ...prevState,
+      [navlink]: show,
     }));
+  };
+
+
+  const togglesortDropdown = () => {
+    setOpen(!Open);
+  };
+  const toggleDropOpen = (navlink) => {
+    // setDropOpenStates((prevStates) => ({
+    //   ...prevStates,
+    //   [navlink]: !prevStates[navlink],
+    // }));
   };
   let navbardetails = [
     {
       "navlink": "New", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "Launch Calender",
         "Subcategory": [{ "type": "Terrace" }, { "type": "#PUMADive" }, { "type": "PUMAxRIPNDIP" }, { "type": "PUMAxWINTER RINK" }, { "type": "PUMAxRHUIGI" }, { "type": "Anushka's Favourite Fits" }, { "type": "PUMAxTHE SUMRFS" }, { "type": "Mancity 23/24 Kit" }, { "type": "Nitro Collection" }, { "type": "PUMA 75 YEARS" }
@@ -40,7 +55,7 @@ export default function Header() {
       ]
     }, {
       "navlink": "Women", "menu": "true",
-      "link":"../products/cards/ProductCard",
+      "link": "/123",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "New & Trending" }, { "type": "#PUMADive" }, { "type": "Softride" }, { "type": "Terrace" }, { "type": "Anushka's Favourite Fits" }, { "type": "Nitro Running" }, { "type": "Curated by Shanaya" }, { "type": "Sports Bras" }, { "type": "Maternity Clothing" }, { "type": "Sustainable Collection" }
@@ -69,7 +84,7 @@ export default function Header() {
     },
     {
       "navlink": "Men", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "New & Trending" }, { "type": "#PUMADive" }, { "type": "Terrace" }, { "type": "Nitro Running" }, { "type": "Motorsport" }, { "type": "Softride" }, { "type": "Sustainable Collection" }
@@ -98,7 +113,7 @@ export default function Header() {
     },
     {
       "navlink": "Kids", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "New & Trending" }, { "type": "School Store" }, { "type": "Shoes Under $3000" }, { "type": "Clothing under $1000" }, { "type": "Vacay Queen" }, { "type": "Puma Mates" }, { "type": "Motorsport" }, { "type": "Essentials" }, { "type": "one8" }
@@ -127,7 +142,7 @@ export default function Header() {
     },
     {
       "navlink": "FENTYxPUMA",
-      "link":"",
+      "link": "",
     },
     {
       "navlink": "Motorsport", "menu": "true",
@@ -144,7 +159,7 @@ export default function Header() {
     },
     {
       "navlink": "Collaborations", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "Select",
         "Subcategory": [{ "type": "PUMAxDAPPER DAN" }, { "type": "PUMAxRHUIGI" }, { "type": "MMQ" }, { "type": "PUMAxWINTER RINK" }, { "type": "PUMAxSPONGEBOB | KIDS" }]
@@ -155,7 +170,7 @@ export default function Header() {
     },
     {
       "navlink": "Sports", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "Running",
         "Subcategory": [{ "type": "Running Store" }, { "type": "Everyday Running" }, { "type": "5-10km Running" }, { "type": "Long Distance Running" }, { "type": "Clothing" }, { "type": "Accessories" }, { "type": "Nitro Collection" }, { "type": "First Mile" }, { "type": "Seasons Collection" }]
@@ -175,7 +190,7 @@ export default function Header() {
     },
     {
       "navlink": "Outlet", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "Sale",
         "Subcategory": [{ "type": "Shop All Outlet" }, { "type": "Sport Shoes from $1799" }, { "type": "Motorsport Starting from $999" }, { "type": "Everything under $1000" }, { "type": "New to Outlet" }]
@@ -203,6 +218,9 @@ export default function Header() {
     "FREE DELIVERIES.FREE RETURNS",
     "CATCH THE #PUMADive CLICK TO KNOW MORE"
   ]
+  const toggleButtonHidden = () => {
+    setButtonHidden(!ButtonHidden);
+  };
 
   // setInterval(() => {
   //   setTextContent((prevIndex) => (prevIndex + 1) % arr.length);
@@ -212,147 +230,226 @@ export default function Header() {
 
   return (
 
-    <div className="sticky top-0 z-20">
+    <div className="sticky top-0 z-20 w-full">
       <header className="m-0">
-        <div className="text-sm lg:text-lg flex justify-center items-center align-middle p-2 h-10 bg-yellow-600">
+        <div className="text-xs font-bold lg:text-lg flex justify-center items-center align-middle p-2 px-0 h-10 bg-yellow-600">
           <p className="text-center">EXTRA 5% INSTANT DISCOUNT FOR ALL ONLINE PAYMENTS</p>
         </div>
         <nav className="flex bg-black text-white">
-          <Link href='' className=' '>
+          <Link href='/' className=' '>
             <img src='https://assets.turbologo.com/blog/en/2019/11/19084917/puma-logo-cover.png' className='w-[60px] h-12 lg:w-[120px] lg:h-[60px] lg:mt-4 mt-2'></img>
           </Link>
-
           <div className="hidden lg:block">
             <div className="flex items-center z-30 justify-center lg-flex-row text-lg pt-2">
               {
                 navbardetails.map((nav, index) => {
-                  (nav.link==undefined?"not":(console.log(nav.link,"nsmd")));
-                  
-                  return(
-                  <div>
-                    <div className="flex items-center z-30 justify-center relative lg-flex-row text-l me-3 group hover:underline">
-                      <div className="pt-5">
-                      {
-                    (nav.link==undefined?" ":(<Link href={nav.link} className="p-4 pt-4 text-xl">{nav.navlink}</Link>))
-                }
-                </div>
+                  console.log(nav.navlink);
+                  return (
+                    // <div key={nav.navlink}>
+                      <Popover>
+                        {({ open }) => (
+                          <div
+                            className="flex items-center z-30 justify-center  lg-flex-row text-l me-3"
+                            onMouseEnter={() => togglePopover(nav.navlink, true)}
+                            onMouseLeave={() => togglePopover(nav.navlink, false)}
+                          >
+                            <Popover.Button className="pt-5 hover:underline">
+                              {nav.link == undefined ? (
+                                " "
+                              ) : (
+                                <Link href={nav.link} className="p-3 pt-4 text-md font-semibold">
+                                  {nav.navlink}
+                                </Link>
+                              )}
 
-                      {nav.menu && (
-                        <div className="hidden group-hover:block hover:block transition-all duration-75">
-                          <div className="absolute top-[60px] left-0 whitespace-nowrap  p-2 ">
-                            <div className="fixed left-0 bg-white w-full">
-                              <div className="flex m-2">
+                              <Transition show={popoverStates[nav.navlink]}
+                                // <Transition.Child>
+                                  enter="transition duration-300 ease-out transform translate-y-0 "
+                                  enterFrom="opacity-0 translate-y-[50%]"
+                                  enterTo="opacity-100 translate-y-[100%]"
+                                  leave="transition duration-300 ease-out transform translate-y-0 "
+                                  leaveFrom="opacity-100 translate-y-[100%]"
+                                  leaveTo="opacity-0 translate-y-0">
+                                
                                 {
-                                  nav.categories.map((category) => (
-                                    <>
-                                      <div className="">
-                                        <div className="flex flex-row w-[270px]">
-                                          <h1 className="font-bold m-1 mt-5">
-                                            {category.category === "Sale" ?
-                                              <Link href='' className="text-red-600 font-normal border-none">{category.category}</Link> : <Link href='' className="text-black text-lg" >{category.category}</Link>
-                                            }
-                                          </h1>
-                                        </div>
-                                        {category.category === "Sale" || category.category === "" ?
-                                          "" : <div className="border border-b-2 border-slate-800 m-10 mt-0 ms-0 mb-2" ></div>
-                                        }
-                                        <div className="flex flex-col me-5">
-                                          {
-                                            category.category === "Sale" ? (category.Subcategory.map((subcat) => (
-                                              subcat.type == "New & Trending" ? (<li className="list-none text-amber-900 m-1 font-bold flex flex-col">
-                                                <Link href='' className=" text-md">{subcat.type}</Link>
-                                              </li>) :
-                                                (<li className="list-none text-slate-600 m-1 font-bold flex flex-col">
-                                                  <Link href='' className="hover:text-black text-md">{subcat.type}</Link>
-                                                </li>)))) : (category.Subcategory.map((subcat) => (
-                                                  <li className="list-none text-slate-600 m-1 flex flex-col">
-                                                    <Link href='' className="hover:text-black text-sm">{subcat.type}</Link>
-                                                  </li>)
-                                                ))
-                                          }
-                                        </div>
+                                  nav.navlink === "FENTYxPUMA" ? ("") : (
+                                    <div className="absolute left-[-50px]">
+                                    <Popover.Panel static className="fixed right-0 left-[-100px] top-[30px] text-left">
+                                      <div className="flex overflow-x-auto pl-[60px] pt-[30px] pb-[50px] bg-white  w-screen">
+                                        {nav.menu &&
+                                          nav.categories.map((category) => (
+                                            <div key={category.category} className="w-[270px]">
+                                              <h1 className="font-bold m-1 mt-5">
+                                                {category.category === "Sale" ? (
+                                                  <Link href="" className="text-red-600 font-normal border-none">
+                                                    {category.category}
+                                                  </Link>
+                                                ) : (
+                                                  <Link href="" className="text-lg text-slate-700">
+                                                    {category.category}
+                                                  </Link>
+                                                )}
+
+                                              </h1>
+                                              {category.category === "Sale" || category.category === "Launch Calender" || category.category === "" ? (
+                                                ""
+                                              ) : (
+                                                <div className="border border-b-2 border-slate-800 m-10 mt-0 ms-0 mb-2"></div>
+                                              )}
+                                              <div className="flex flex-col me-5">
+                                                {category.category === "Sale" || category.category === "Launch Calender"
+                                                  ? category.Subcategory.map((subcat) =>
+                                                    subcat.type === "New & Trending" ? (
+                                                      <li key={subcat.type} className="list-none text-amber-900 m-1 font-bold flex flex-col">
+                                                        <Link href="" className="text-md">
+                                                          {subcat.type}
+                                                        </Link>
+                                                      </li>
+                                                    ) : (
+                                                      <li key={subcat.type} className="list-none text-slate-600 m-1 font-bold flex flex-col">
+                                                        <Link href="" className="hover:text-black text-md">
+                                                          {subcat.type}
+                                                        </Link>
+                                                      </li>
+                                                    )
+                                                  )
+                                                  : category.Subcategory.map((subcat) => (
+                                                    <li key={subcat.type} className="list-none text-slate-600 m-1 flex flex-col">
+                                                      <Link href="" className="hover:text-black text-sm">
+                                                        {subcat.type}
+                                                      </Link>
+                                                    </li>
+                                                  ))}
+
+                                              </div>
+                                            </div>
+                                          ))}
                                       </div>
-                                    </>
-                                  ))
-                                }
-                              </div>
-                            </div>
+                                    </Popover.Panel>
+                                    </div>
+                                  )}
+                                  {/* </Transition.Child> */}
+                              </Transition>
+                            </Popover.Button>
                           </div>
-                        </div>
-                      )
-                      }
-                    </div>
-                  </div>
-                )})
+                        )}
+                      </Popover>
+                    // </div>
+                  )
+                })
               }
             </div>
           </div>
-          <div className='flex mt-3 lg:m-3 lg:justify-end lg:items-end ml-0 lg:ml-auto'>
+          <div className='flex lg:m-3 justify-end items-end ml-auto lg:ml-auto'>
             <div>
-              <input type='text' placeholder='  SEARCH' className='h-8 justify-center align-center lg:block hidden text-white border bg-transparent hover:text-slate-500 border-white w-40 rounded-lg p-5 m-2' />
-              <FiSearch className="lg:hidden m-2 text-xl" />
+              <input type='text' placeholder='  SEARCH' className='h-8 justify-center align-center lg:block hidden text-white border bg-transparent hover:text-slate-500 border-white w-40 p-5 m-3' />
+              <FiSearch className="lg:hidden m-5 text-xl" />
             </div>
-            <Link href='' className='m-2 lg:m-5 hover:text-blue-500' title='likes'>
+            <Link href='/login/wishlist' className='m-5 mx-3 lg:m-5 hover:text-blue-500' title='likes'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 bg-inherit hover:rounded bg-gray-400">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
               </svg>
             </Link>
-            <Link href="" className='m-2 lg:m-5 hover:text-blue-500' title='cart'>
+            <Link href="" className='m-5 mx-3 lg:m-5 hover:text-blue-500' title='cart'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
             </Link>
-            <Link href='' className='m-2 lg:m-5 hover:text-blue-500' title='profile'>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </Link>
+            <button onClick={togglesortDropdown}>
+              <Link href='' className='m-5 mx-3 lg:m-5 relative hover:text-blue-500 hidden lg:block' title='profile'>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </Link>
+            </button>
+            <div className="hidden lg:block">
+              <div className={`flex flex-col relative ${Open ? 'block' : 'hidden'}`}>
+                <div className="w-10 h-10 bg-white right-[25px] fixed rotate-45"></div>
+                <div className='absolute w-[340px] h-[350px] right-[5px] p-1 border border-slate-400  text-md text-black bg-white rounded'>
+                  <div className="flex flex-col justify-end items-start py-3">
+                    <Link href='' className=" m-1 mx-4 my-1 p-1 border-b-2 w-[290px] border-slate-400 ">My Account</Link>
+                    <Link href='' className=" m-1 mx-4 my-1 p-1 border-b-2 w-[290px] border-slate-400 ">Wishlist</Link>
+                    <Link href='' className=" m-1 mx-4 my-1 p-1 border-b-2 w-[290px] border-slate-400 ">Check Order/Initiate Return</Link>
+                    <Link href='' className=" m-1 mx-4 my-1 p-1 border-b-2 w-[290px] border-slate-400 ">Store Finder</Link>
+                    <Link href='' className=" m-1 mx-4 my-1 p-1">Language</Link>
+                  </div>
+                  <div className="flex flex-col">
+                    <button className="border border-black bg-black text-white m-1 mx-4 my-1 p-1 font-bold py-2 ">LOGIN</button>
+                    <button className="border border-black bg-white text-black m-1 mx-4 my-1 p-1 font-bold py-2">REGISTER HERE</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
           {/* for mobile view */}
           <Popover className={"relative lg:hidden "}>
-            <Popover.Button className={"absolute left-5 m-2 p-2 font-bold  text-white ml-auto "}>
+            <Popover.Button
+              className={"m-3 p-2 font-bold text-white ml-auto"}
+              onClick={toggleButtonHidden}
+            >
               <div className="flex">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className="w-6 h-6 me-2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />           
-                </svg>
-                <p>Menu</p>
+                {
+                  ButtonHidden ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      className="w-6 h-6 me-2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  ) : (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>)
+                }
+                <p className="font-normal text-sm">MENU</p>
               </div>
             </Popover.Button>
-            <Popover.Panel className={"fixed w-[100%] left-0 right-0"}>
-              <div className="flex flex-col text-lg w-full absolute top-[80px] bg-white">
+
+            <Popover.Panel className={"w-full max-h-max left-0 right-0 fixed"}>
+              <div className="flex flex-col bg-white overflow-y-scroll w-full h-screen ">
+
                 {navbardetails.map((nav) => (
-                  <button onClick={() => toggleDropOpen(nav.navlink)}>
-                    <div className="flex justify-between items-center border-b-2 m-1 mx-4 border-slate-200">
-                      <Link href="" className="m-6 text-black hover:text-red-500 hover:underline">
-                        {nav.navlink}
-                      </Link>
-                      {dropOpenStates[nav.navlink] ? (
-                        <MdOutlineKeyboardArrowDown className="h-8 m-1 text-black"></MdOutlineKeyboardArrowDown>
-                      ) : (
-                        <MdOutlineKeyboardArrowUp className="h-8 m-1 text-black"></MdOutlineKeyboardArrowUp>
-                      )}
-                    </div>
-                  </button>
+
+                  nav.navlink == "FENTYxPUMA" ? (<div className="flex justify-between text-lg items-center border-b-2 m-1 mx-4 border-slate-200">
+                    <Link href="" className="m-2 text-black hover:text-red-500 hover:underline">
+                      {nav.navlink}
+                    </Link>
+                  </div>) : (<div className={`flex justify-between text-xl items-center border-b-2 m-1 mx-4 ${Lastindex ? '' : 'border-b-2 border-slate-200'}`}>
+                    <Link href="" className="m-2 font-bold text-black hover:text-red-500 hover:underline">
+                      {nav.navlink}
+                    </Link>
+                    <MdOutlineKeyboardArrowRight className="h-8 m-1 text-black"></MdOutlineKeyboardArrowRight>
+                  </div>)
+
                 ))}
+
+                <div className=" flex flex-col text-md w-full text-black my-2">
+                  <Link href='' className="border-b-2 m-1 mx-4 border-slate-200 px-2 pb-2">My Account</Link>
+                  <Link href='' className="border-b-2 m-1 mx-4 border-slate-200 px-2 pb-2">Wishlist</Link>
+                  <Link href='' className="border-b-2 m-1 mx-4 border-slate-200 px-2 pb-2">Check Order/Initiate Return</Link>
+                  <Link href='' className="border-b-2 m-1 mx-4 border-slate-200 px-2 pb-2">Store Finder</Link>
+                  <Link href='' className="border-b-2 m-1 mx-4 border-slate-200 px-2 pb-2">Language</Link>
+                </div>
+                <div className="flex flex-col">
+                  <button className="border border-black bg-black text-white">LOGIN</button>
+                  <button className="border border-white bg-white text-black">REGISTER HERE</button>
+                </div>
+
               </div>
+
             </Popover.Panel>
           </Popover>
         </nav>
       </header>
     </div>
-  );
+  )
 }
 
 

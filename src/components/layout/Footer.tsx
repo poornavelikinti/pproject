@@ -24,7 +24,7 @@ export default function Footer() {
               <Link href='' className='hover:text-blue-500'>Terms & Conditions</Link>
               <Link href='' className='hover:text-blue-500'>Cookie Settings</Link>
             </div>
-          </div>
+          </div>  
           <div className='text-white mx-20 text-md mt-10'>
             <div className='p-2 flex flex-col'>
               <Link href='' className='hover:text-blue-500'>FAQs</Link>
@@ -48,7 +48,7 @@ export default function Footer() {
               <Link href='' className='hover:text-blue-500'>PUMA DNA</Link>
             </div>
           </div>
-          <div className='flex flex-col'>
+          <div className='flex flex-col mx-[120px]'>
             <div className='text-white font-bold text-lg w-auto m-14'>
               <h1>STAY UP TO DATE</h1>
               <div className='flex justify-between mt-2'>
@@ -106,7 +106,7 @@ export default function Footer() {
                 </Link>
               </div>
             </div>
-            <div className='text-white mt-8 ms-16 font-bold text-lg'>
+            <div className='text-white ms-16 font-bold text-lg'>
               <h1>EXPLORE</h1>
               <div className='flex'>
                 <Link href=''>
@@ -119,8 +119,10 @@ export default function Footer() {
             </div>
           </div>
         </div>
+<div className="border border-b-1 border-white m-[25px] mx-[50px]">
 
-        <div className='flex justify-between align-middle'>
+</div>
+        <div className='flex justify-between align-middle pb-[50px] mt-[25px]'>
           <div className='flex'>
             <Link href=''>
               <img src='https://content.pymnts.com/wp-content/uploads/2023/09/Visa_Inc_logosvg.png' className='w-12 h-8 mt-4 ms-20 me-3'></img>
@@ -139,7 +141,7 @@ export default function Footer() {
           <div className='h-6 w-16 border border-black  bg-white m-3'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ROSg4ORJSViyKLTjn3Daz6k2CCRI9WafIA&usqp=CAU"></img>
           </div>
-          <div className='text-white m-3'>
+          <div className='text-white m-3 mx-[70px]'>
             <p>Puma alrights reserved</p>
           </div>
         </div>
@@ -151,9 +153,9 @@ export default function Footer() {
 
               <h1 className="m-3 text-lg">SUPPORT</h1>
               {!Supportdropopen ? (
-                <MdOutlineKeyboardArrowDown className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowDown>
+                <MdOutlineKeyboardArrowDown className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowDown>
               ) : (
-                <MdOutlineKeyboardArrowUp className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowUp>
+                <MdOutlineKeyboardArrowUp className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowUp>
               )}
             </Disclosure.Button>
             <Disclosure.Panel className="p-2 px-3 text-md bg-black text-white">
@@ -177,9 +179,9 @@ export default function Footer() {
 
               <h1 className="m-3 text-lg">ABOUT</h1>
               {!Aboutdropopen ? (
-                <MdOutlineKeyboardArrowDown className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowDown>
+                <MdOutlineKeyboardArrowDown className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowDown>
               ) : (
-                <MdOutlineKeyboardArrowUp className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowUp>
+                <MdOutlineKeyboardArrowUp className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowUp>
               )}
             </Disclosure.Button>
             <Disclosure.Panel className="p-2 px-3 text-md bg-black text-white">
@@ -199,9 +201,9 @@ export default function Footer() {
             <Disclosure.Button className="flex w-full justify-between bg-black text-white text-left text-sm font-medium" onClick={() => setStaydropopen((prev) => !prev)}>
               <h1 className="m-3 text-lg">STAY UPTO DATE</h1>
               {!Staydropopen ? (
-                <MdOutlineKeyboardArrowDown className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowDown>
+                <MdOutlineKeyboardArrowDown className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowDown>
               ) : (
-                <MdOutlineKeyboardArrowUp className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowUp>
+                <MdOutlineKeyboardArrowUp className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowUp>
               )}
             </Disclosure.Button>
             <Disclosure.Panel className="p-2 text-sm bg-black text-white">
@@ -266,9 +268,9 @@ export default function Footer() {
 
               <h1 className="m-3 text-lg">EXPLORE</h1>
               {!Exploredropopen ? (
-                <MdOutlineKeyboardArrowDown className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowDown>
+                <MdOutlineKeyboardArrowDown className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowDown>
               ) : (
-                <MdOutlineKeyboardArrowUp className="h-8 m-1 text-lg"></MdOutlineKeyboardArrowUp>
+                <MdOutlineKeyboardArrowUp className="h-8 m-1 mx-5 text-lg"></MdOutlineKeyboardArrowUp>
               )}
             </Disclosure.Button>
             <Disclosure.Panel className="p-2 px-3 text-md bg-black text-white">
@@ -282,7 +284,7 @@ export default function Footer() {
               </div>
             </Disclosure.Panel>
           </Disclosure>
-          <div className="mb-5">
+          <div className="">
           <div className='flex justify-center items-center border border-white bg-black m-6'>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9ROSg4ORJSViyKLTjn3Daz6k2CCRI9WafIA&usqp=CAU" className="h-10 w-10 rounded-full p-1"></img>
             <h1 className="text-white ">INDIA</h1>
