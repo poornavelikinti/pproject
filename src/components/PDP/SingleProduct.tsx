@@ -25,8 +25,8 @@ function SingleProduct({ id }) {
                         <div className='relative'>
                             {
                                 product.pricetag ? (
-                                    <h1 className='absolute lg:m-5 p-2 z-50 text-white h-[25px] lg:h-[40px] w-[60px] lg:rounded-md text-center bg-red-600'>
-                                        <p className=' text-sm font-semibold lg:font-bold lg:text-lg left-[50px] top-[100px] lg:top-[283px] lg:left-[80px]'>{product.pricetag}</p></h1>) : null
+                                    <h1 className='absolute lg:m-5 p-2 z-10 text-white h-[30 px] lg:h-[40px] w-[60px] lg:rounded-md text-center bg-red-600'>
+                                        <p className=' text-sm font-semibold lg:font-bold lg:text-lg left-[50px] lg:top-[283px] lg:left-[80px]'>{product.pricetag}</p></h1>) : null
                             }
 
                             <div className='flex flex-col lg:flex-row'>
@@ -121,7 +121,7 @@ function SingleProduct({ id }) {
                                                 </button>
                                         </div>
                                     </div>
-                                    <div className='flex m-2 lg:p-5 p-2 py-5 lg:py-0'>
+                                    <div className='flex lg:m-2 my-2 lg:my-0 lg:p-5 py-5 lg:py-0'>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
                                         </svg>
@@ -129,27 +129,27 @@ function SingleProduct({ id }) {
                                     </div>
                                     <div className='border border-slate-300 border-x-1 lg:m-3'></div>
                                     <div className='lg:m-2'>
-                                        <h1 className='lg:p-2 py-3 lg:py-0 lg:text-lg text-md font-light'>Please enter PIN code to check delivery time</h1>
-                                        <h1 className='lg:p-2 font-semibold text-left lg:text-md text-sm'>PIN CODE</h1>
-                                        <div className='lg:p-2'>
-                                            <input type='text' maxLength="5" placeholder='PIN Code' className='me-2 w-[440px] h-[60px] p-4'></input>
-                                            <button className='text-white bg-black font-bold text-lg text-center ms-1 w-[140px] h-[60px]'>CHECK</button>
+                                        <h1 className='lg:p-2 py-3 lg:py-0 lg:text-lg text-md font-light text-black'>Please enter PIN code to check delivery time</h1>
+                                        <h1 className='lg:p-2 font-semibold text-left lg:text-md text-xs'>PIN CODE</h1>
+                                        <div className='lg:p-2 flex flex-col justify-end items-end lg:flex-row'>
+                                            <input type='text' maxLength="5" placeholder='PIN Code' className='me-2 lg:w-[440px] lg:h-[60px] w-full my-2 lg:my-0 p-4'></input>
+                                            <button className='text-white bg-black font-bold text-lg lg:text-center ms-1 w-[120px] lg:w-[140px] lg:h-[60px] h-[50px]'>CHECK</button>
                                         </div>
                                     </div>
                                     <div className='border border-slate-300 border-x-1 m-3'></div>
                                     <div className='m-2'>
-                                        <h1 className='py-4 font-semibold text-xl'>Description</h1>
-                                        <p className='text-lg font-light'>Take your training to the next level with the {product.title}.The latest version has strategically placed rubber zones for
-                                            <ul className='m-4 text-lg list-disc'>
+                                        <h1 className='py-4 font-semibold lg:text-xl text-l'>Description</h1>
+                                        <p className='lg:text-lg text-md font-thin lg:font-light'>Take your training to the next level with the {product.title}.The latest version has strategically placed rubber zones for
+                                            <ul className='m-4 lg:text-lg font-thin list-disc'>
                                                 <li>Style:</li>
                                                 <li>Color:</li>
                                             </ul>
                                         </p>
-                                        <Link href='' className='font-bold text-lg py-8 underline'>ReadMore</Link>
-                                        <div>
-                                            <h1 className='font-semibold text-2xl py-5 mt-3'>Shipping and Returns</h1>
-                                            <p className='text-lg font-light'>Free return for all qualifying orders within <span className='font-bold'>14 days of your order delivery date</span>. Visit our <Link href='' className='underline'>Return Policy</Link> for more information.</p>
-                                            <p className='text-lg font-light'>For any queries, please contact Customer Service at 080-35353535 or via <Link href='' className='underline'>customercareindia@puma.com</Link></p>
+                                        <Link href='' className='font-bold text-sm lg:text-lg py-8 underline'>READ MORE</Link>
+                                        <div className='text-black'>
+                                            <h1 className='font-semibold lg:text-2xl text-lg py-5 mt-3'>Shipping and Returns</h1>
+                                            <p className='lg:text-lg font-light'>Free return for all qualifying orders within <span className='font-bold'>14 days of your order delivery date</span>. Visit our <Link href='' className='underline'>Return Policy</Link> for more information.</p>
+                                            <p className='mt-5 lg:mt-0 lg:text-lg font-light'>For any queries, please contact Customer Service at 080-35353535 or via <Link href='' className='underline'>customercareindia@puma.com</Link></p>
                                         </div>
                                     </div>
                                 </div>

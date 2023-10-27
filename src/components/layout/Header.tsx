@@ -2,13 +2,17 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { FiSearch } from "react-icons/fi";
-import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft } from "react-icons/md";
-// import { ProfileCard } from "../loginpage/LoginPage"
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { IoMdClose } from "react-icons/io"
+import Search from "../search/Search";
 
 
 export default function Header() {
   const [ButtonHidden, setButtonHidden] = useState(true);
+  const [Searchbar, setSearchbar] = useState(false)
+  let [closebtn, setclosebtn] = useState(true);
+
+
   const Lastindex = (navLink, currentIndex) => {
     currentIndex === (navLink.length - 1);
   }
@@ -146,6 +150,7 @@ export default function Header() {
     },
     {
       "navlink": "Motorsport", "menu": "true",
+      "link":"",
       "categories": [{
         "category": "",
         "Subcategory": [{ "type": "Motorsport Store" }, { "type": "Scuderia Ferrari" }, { "type": "Mercedes AMG Petronas" }, { "type": "BMW M Motorsport" }]
@@ -218,15 +223,18 @@ export default function Header() {
     "FREE DELIVERIES.FREE RETURNS",
     "CATCH THE #PUMADive CLICK TO KNOW MORE"
   ]
-  const toggleButtonHidden = () => {
-    setButtonHidden(!ButtonHidden);
-  };
 
   // setInterval(() => {
   //   setTextContent((prevIndex) => (prevIndex + 1) % arr.length);
   // }, 3000);
 
   // const text = arr[textContent];
+  const toggleButtonHidden = () => {
+    setButtonHidden(!ButtonHidden);
+  };
+  const SearchClick = () => {
+    setSearchbar(!Searchbar)
+  }
 
   return (
 
@@ -235,128 +243,148 @@ export default function Header() {
         <div className="text-xs font-bold lg:text-lg flex justify-center items-center align-middle p-2 px-0 h-10 bg-yellow-600">
           <p className="text-center">EXTRA 5% INSTANT DISCOUNT FOR ALL ONLINE PAYMENTS</p>
         </div>
-        <nav className="flex bg-black text-white">
+        <nav className="flex bg-black text-white px-2 lg:px-[50px]">
           <Link href='/' className=' '>
             <img src='https://assets.turbologo.com/blog/en/2019/11/19084917/puma-logo-cover.png' className='w-[60px] h-12 lg:w-[120px] lg:h-[60px] lg:mt-4 mt-2'></img>
           </Link>
           <div className="hidden lg:block">
-            <div className="flex items-center z-30 justify-center lg-flex-row text-lg pt-2">
+            <div className="flex items-center z-80 justify-center lg-flex-row text-lg pt-2">
               {
                 navbardetails.map((nav, index) => {
                   console.log(nav.navlink);
                   return (
                     // <div key={nav.navlink}>
-                      <Popover>
-                        {({ open }) => (
-                          <div
-                            className="flex items-center z-30 justify-center  lg-flex-row text-l me-3"
-                            onMouseEnter={() => togglePopover(nav.navlink, true)}
-                            onMouseLeave={() => togglePopover(nav.navlink, false)}
-                          >
-                            <Popover.Button className="pt-5 hover:underline">
-                              {nav.link == undefined ? (
-                                " "
-                              ) : (
-                                <Link href={nav.link} className="p-3 pt-4 text-md font-semibold">
-                                  {nav.navlink}
-                                </Link>
-                              )}
+                    <Popover>
+                      {({ open }) => (
+                        <div
+                          className="flex items-center z-30 justify-center  lg-flex-row text-l me-3"
+                          onMouseEnter={() => togglePopover(nav.navlink, true)}
+                          onMouseLeave={() => togglePopover(nav.navlink, false)}
+                        >
+                          <Popover.Button className="pt-5 hover:underline hover:underline-offset-4">
+                            {nav.link == undefined ? (
+                              " "
+                            ) : (
+                              <Link href={nav.link} className="p-3  text-lg font-semibold">
+                                {nav.navlink}
+                              </Link>
+                            )}
 
-                              <Transition show={popoverStates[nav.navlink]}
-                                // <Transition.Child>
-                                  enter="transition duration-300 ease-out transform translate-y-0 "
-                                  enterFrom="opacity-0 translate-y-[50%]"
-                                  enterTo="opacity-100 translate-y-[100%]"
-                                  leave="transition duration-300 ease-out transform translate-y-0 "
-                                  leaveFrom="opacity-100 translate-y-[100%]"
-                                  leaveTo="opacity-0 translate-y-0">
-                                
-                                {
-                                  nav.navlink === "FENTYxPUMA" ? ("") : (
-                                    <div className="absolute left-[-50px]">
-                                    <Popover.Panel static className="fixed right-0 left-[-100px] top-[30px] text-left">
-                                      <div className="flex overflow-x-auto pl-[60px] pt-[30px] pb-[50px] bg-white  w-screen">
-                                        {nav.menu &&
-                                          nav.categories.map((category) => (
-                                            <div key={category.category} className="w-[270px]">
-                                              <h1 className="font-bold m-1 mt-5">
-                                                {category.category === "Sale" ? (
-                                                  <Link href="" className="text-red-600 font-normal border-none">
-                                                    {category.category}
-                                                  </Link>
+                            <Transition 
+                            show={popoverStates[nav.navlink]}
+                            // appear={true}
+                            //   enter="transition-opacity ease-in translate-y-0 duration-2000 delay-2000"
+                            //   enterFrom="opacity-0 "
+                            //   enterTo="opacity-100 translate-y-full "
+                            //   leave="transition-opacity duration-1500"
+                            //   leaveFrom="opacity-100 "
+                            //   leaveTo="opacity-0 translate-y-0 "
+                              >
+
+                              {
+                                nav.navlink === "FENTYxPUMA" ? ("") : (
+                                  <div className="">
+                                    <Popover.Panel static className="fixed right-0 left-0 top-[110px] text-left">
+                                      <div className="flex transfrom duration-700 translate-y-50">
+                                        <div className="flex overflow-x-auto pl-[60px] pt-[30px] pb-[50px] bg-white  w-screen">
+                                          {nav.menu &&
+                                            nav.categories.map((category) => (
+                                              <div key={category.category} className="w-[270px]">
+                                                <h1 className="font-bold m-1 mt-5">
+                                                  {category.category === "Sale" ? (
+                                                    <Link href="" className="text-red-600 font-normal border-none">
+                                                      {category.category}
+                                                    </Link>
+                                                  ) : (
+                                                    <Link href="" className="text-lg text-slate-700">
+                                                      {category.category}
+                                                    </Link>
+                                                  )}
+
+                                                </h1>
+                                                {category.category === "Sale" || category.category === "Launch Calender" || category.category === "" ? (
+                                                  ""
                                                 ) : (
-                                                  <Link href="" className="text-lg text-slate-700">
-                                                    {category.category}
-                                                  </Link>
+                                                  <div className="border border-b-2 border-slate-800 m-10 mt-0 ms-0 mb-2"></div>
                                                 )}
-
-                                              </h1>
-                                              {category.category === "Sale" || category.category === "Launch Calender" || category.category === "" ? (
-                                                ""
-                                              ) : (
-                                                <div className="border border-b-2 border-slate-800 m-10 mt-0 ms-0 mb-2"></div>
-                                              )}
-                                              <div className="flex flex-col me-5">
-                                                {category.category === "Sale" || category.category === "Launch Calender"
-                                                  ? category.Subcategory.map((subcat) =>
-                                                    subcat.type === "New & Trending" ? (
-                                                      <li key={subcat.type} className="list-none text-amber-900 m-1 font-bold flex flex-col">
-                                                        <Link href="" className="text-md">
-                                                          {subcat.type}
-                                                        </Link>
-                                                      </li>
-                                                    ) : (
-                                                      <li key={subcat.type} className="list-none text-slate-600 m-1 font-bold flex flex-col">
-                                                        <Link href="" className="hover:text-black text-md">
-                                                          {subcat.type}
-                                                        </Link>
-                                                      </li>
+                                                <div className="flex flex-col me-5">
+                                                  {category.category === "Sale" || category.category === "Launch Calender"
+                                                    ? category.Subcategory.map((subcat) =>
+                                                      subcat.type === "New & Trending" ? (
+                                                        <li key={subcat.type} className="list-none text-amber-900 m-1 font-bold flex flex-col">
+                                                          <Link href="" className="text-md">
+                                                            {subcat.type}
+                                                          </Link>
+                                                        </li>
+                                                      ) : (
+                                                        <li key={subcat.type} className="list-none text-slate-600 m-1 font-bold flex flex-col">
+                                                          <Link href="" className="hover:text-black text-md">
+                                                            {subcat.type}
+                                                          </Link>
+                                                        </li>
+                                                      )
                                                     )
-                                                  )
-                                                  : category.Subcategory.map((subcat) => (
-                                                    <li key={subcat.type} className="list-none text-slate-600 m-1 flex flex-col">
-                                                      <Link href="" className="hover:text-black text-sm">
-                                                        {subcat.type}
-                                                      </Link>
-                                                    </li>
-                                                  ))}
+                                                    : category.Subcategory.map((subcat) => (
+                                                      <li key={subcat.type} className="list-none text-slate-600 m-1 flex flex-col">
+                                                        <Link href="" className="hover:text-black text-sm">
+                                                          {subcat.type}
+                                                        </Link>
+                                                      </li>
+                                                    ))}
 
+                                                </div>
                                               </div>
-                                            </div>
-                                          ))}
+                                            ))}
+                                        </div>
                                       </div>
                                     </Popover.Panel>
-                                    </div>
-                                  )}
-                                  {/* </Transition.Child> */}
-                              </Transition>
-                            </Popover.Button>
-                          </div>
-                        )}
-                      </Popover>
+                                  </div>
+                                )}
+                              {/* </Transition.Child> */}
+                            </Transition>
+                          </Popover.Button>
+                        </div>
+                      )}
+                    </Popover>
                     // </div>
                   )
                 })
               }
             </div>
           </div>
-          <div className='flex lg:m-3 justify-end items-end ml-auto lg:ml-auto'>
-            <div>
-              <input type='text' placeholder='  SEARCH' className='h-8 justify-center align-center lg:block hidden text-white border bg-transparent hover:text-slate-500 border-white w-40 p-5 m-3' />
-              <FiSearch className="lg:hidden m-5 text-xl" />
+          <div className='flex  justify-end items-end ml-auto lg:ml-auto'>
+            <div className="lg:hidden">
+              <button onClick={SearchClick} className="m-4 mx-1 lg:m-5 p-2">
+            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+                </button>
+                <div className={`z-50 w-full fixed top-0 left-0 ${Searchbar ? "block" : "hidden"}`} >
+                <Search />
+              </div>
             </div>
-            <Link href='/login/wishlist' className='m-5 mx-3 lg:m-5 hover:text-blue-500' title='likes'>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 bg-inherit hover:rounded bg-gray-400">
+            <div className="hidden lg:block">
+              <button onClick={SearchClick} className="inline-flex items-center w-[150px]  mb-5 py-2.5 px-3 ml-2 text-sm font-medium text-white border border-slate-500 p-2 ">
+                <svg className="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>SEARCH
+              </button>
+              <div className={`z-50 w-full fixed top-0 left-0 ${Searchbar ? "block" : "hidden"}`} >
+                <Search />
+              </div>
+            </div>
+            <Link href='/login/wishlist' className='m-4 mx-1 lg:m-5 lg:mx-2 p-2 rounded-full  hover:bg-slate-300 hover:rounded-full' title='' >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
               </svg>
             </Link>
-            <Link href="" className='m-5 mx-3 lg:m-5 hover:text-blue-500' title='cart'>
+            <Link href="/cart" className='m-4 mx-1 lg:m-5 lg:mx-2 rounded-full p-2  hover:bg-slate-300 hover:rounded-full' title='cart'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
             </Link>
             <button onClick={togglesortDropdown}>
-              <Link href='' className='m-5 mx-3 lg:m-5 relative hover:text-blue-500 hidden lg:block' title='profile'>
+              <Link href='' className='m-4 mx-1 lg:m-5 lg:mx-2 relative p-2 hidden lg:block rounded-full  hover:bg-slate-300 hover:rounded-full' title='profile'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>

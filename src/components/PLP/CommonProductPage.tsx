@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
-import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineClose } from "react-icons/ai"
 import { TfiLayoutGrid4Alt } from "react-icons/tfi"
 import { TbLayoutGrid } from "react-icons/tb";
+import { BiSquare } from "react-icons/bi"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Scrollbar } from "swiper/modules";
 import Link from "next/link";
@@ -10,13 +10,32 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronLeft, faChevronRight, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import {  faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
 import { products } from '../products/ProductsData';
 import 'swiper/swiper-bundle.css';
 
 
 function CommonProductPage() {
-    const swiperRef = useRef(false)
+    const swiperRef = useRef(false);
+    const [isClickedsquare, setIsClickedsquare] = useState(false);
+    const [isClickedGrid,setIsClickedGrid]=useState(false)
+    const [isClickedlarge,setIsClickedlarge]=useState(true)
+    const handleButtonClick = () => {
+        setIsClickedsquare(!isClickedsquare);
+        setIsClickedGrid(true)
+    };
+    const handleGridClick = () => {
+        setIsClickedGrid(!isClickedGrid);
+        setIsClickedlarge(false)
+        setIsClickedsquare(false)
+    };
+    const handlelargeClick = () => {
+        setIsClickedlarge(!isClickedlarge);
+        setIsClickedGrid(false)
+    };
+    const squareClasses = `h-6 w-6 m-1 lg:hidden ${isClickedsquare ? 'border border-black' : ''}`
+    const GridClasses = `h-6 w-6 m-1 lg:h-8 lg:w-8 ${isClickedGrid ? 'lg:border lg:border-black' : 'border border-black lg:border-none'}`
+    const largeClasses = ` m-1 h-8 w-8  hidden lg:block ${isClickedlarge ? 'border border-black' : ''}`
 
     const handlePrevButtonClick = () => {
         if (swiperRef.current) {
@@ -27,7 +46,6 @@ function CommonProductPage() {
         }
 
     };
-
     const handleNextButtonClick = () => {
         if (swiperRef.current) {
             const swiperInstance = swiperRef.current.swiper;
@@ -40,11 +58,12 @@ function CommonProductPage() {
 
     return (
         <div>
-            <div className="flex justify-between m-8">
+            <div className="flex justify-between lg:m-8 m-5">
                 <h1 className="text-xl font-sans font-medium">{products.length} PRODUCTS</h1>
                 <div className="flex justify-between text-lg">
-                    <TfiLayoutGrid4Alt className=" h-10 w-10 p-2"></TfiLayoutGrid4Alt>
-                    <TbLayoutGrid className=" h-10 w-10 p-2"></TbLayoutGrid>
+                    <BiSquare onClick={handleButtonClick} className={squareClasses}></BiSquare>
+                    <TbLayoutGrid onClick={handleGridClick} className={GridClasses}></TbLayoutGrid>
+                    <TfiLayoutGrid4Alt onClick={handlelargeClick} className={largeClasses}></TfiLayoutGrid4Alt>
                 </div>
             </div>
             <div className="flex flex-wrap m-10 relative z-1  className='mb-[50px]'">

@@ -60,7 +60,7 @@ export default function ProductCard() {
                 <p>EXTRA 10% OFF ON ABOVE 2000RS ORDERS</p>
                 <p className="text-xs font-normal">Discount auto-applied to orders checkout</p>
             </div>
-            <h1 className="text-xl font-bold font-serif m-2 ms-10 p-5">WOMEN</h1>
+            <h1 className="text-xl font-bold font-serif m-2 lg:ms-10 p-5">WOMEN</h1>
             <div className="flex justify-between border border-t-gray-300 z-10 border-b-gray-300 items-center">
                 <div className="flex justify-center items-center m-1 z-10">
                     <div className="block lg:hidden z-10">

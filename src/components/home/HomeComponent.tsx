@@ -98,7 +98,7 @@ function HomeComponent() {
                     <h1 className='lg:text-5xl font-bold lg:mb-2'>PUMA x STAPLE</h1>
                     <h1 className='lg:text-3xl'>COLLEGIATE CLASSICS,REIMAGINED</h1>
                     <div className='m-4 lg:m-[40px] mt-[30px]'>
-                        <Link href='' className='border border-black bg-black text-white lg:border-white lg:bg-white font-bold lg:text-lg lg:text-md lg:text-black lg:p-5 px-5 lg:px-0 p-2 lg:py-3'>SHOP NOW</Link>
+                        <Link href='' className='border border-black bg-black text-white lg:border-white lg:bg-white font-bold lg:text-lg lg:text-md lg:text-black lg:p-5 px-5 lg:px-5 p-2 lg:py-3'>SHOP NOW</Link>
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@ function HomeComponent() {
                 <div className=''>
                 <img src={homeimages[8].img} alt="image 7" className='w-full lg:h-[500px]'></img>
                 </div>
-                <div className='lg:absolute left-14 lg:top-[140px] lg:left-[525px]'>
+                <div className='lg:absolute left-14 lg:top-[140px] lg:left-[600px]'>
                 <div className='flex flex-col justify-center items-center lg:pt-[10%] pt-[25px] lg:text-white'>
                     <h1 className='lg:text-4xl text-2xl font-bold'>FENTY x PUMA</h1>
                     <h1 className='lg:text-3xl text-xs mt-2'>NEW AVANTI DROP COMING SOON</h1>
