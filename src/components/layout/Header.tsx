@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { IoMdClose } from "react-icons/io"
@@ -10,8 +10,8 @@ import Search from "../search/Search";
 export default function Header() {
   const [ButtonHidden, setButtonHidden] = useState(true);
   const [Searchbar, setSearchbar] = useState(false)
-  let [closebtn, setclosebtn] = useState(true);
-
+  const [closebtn, setclosebtn] = useState(true);
+  const [textContent, setTextContent] = useState(0)
 
   const Lastindex = (navLink, currentIndex) => {
     currentIndex === (navLink.length - 1);
@@ -25,6 +25,7 @@ export default function Header() {
       [navlink]: show,
     }));
   };
+
 
 
   const togglesortDropdown = () => {
@@ -150,7 +151,7 @@ export default function Header() {
     },
     {
       "navlink": "Motorsport", "menu": "true",
-      "link":"",
+      "link": "",
       "categories": [{
         "category": "",
         "Subcategory": [{ "type": "Motorsport Store" }, { "type": "Scuderia Ferrari" }, { "type": "Mercedes AMG Petronas" }, { "type": "BMW M Motorsport" }]
@@ -224,16 +225,25 @@ export default function Header() {
     "CATCH THE #PUMADive CLICK TO KNOW MORE"
   ]
 
-  // setInterval(() => {
-  //   setTextContent((prevIndex) => (prevIndex + 1) % arr.length);
-  // }, 3000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextContent((prevIndex) => (prevIndex + 1) % arr.length);
+    }, 3000);
 
-  // const text = arr[textContent];
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const text = arr[textContent];
   const toggleButtonHidden = () => {
     setButtonHidden(!ButtonHidden);
   };
   const SearchClick = () => {
     setSearchbar(!Searchbar)
+  }
+  const handlehoverclose = () => {
+    setPopoverStates(!popoverStates)
   }
 
   return (
@@ -241,7 +251,7 @@ export default function Header() {
     <div className="sticky top-0 z-20 w-full">
       <header className="m-0">
         <div className="text-xs font-bold lg:text-lg flex justify-center items-center align-middle p-2 px-0 h-10 bg-yellow-600">
-          <p className="text-center">EXTRA 5% INSTANT DISCOUNT FOR ALL ONLINE PAYMENTS</p>
+          <p className="text-center">{text}</p>
         </div>
         <nav className="flex bg-black text-white px-2 lg:px-[50px]">
           <Link href='/' className=' '>
@@ -251,7 +261,7 @@ export default function Header() {
             <div className="flex items-center z-80 justify-center lg-flex-row text-lg pt-2">
               {
                 navbardetails.map((nav, index) => {
-                  console.log(nav.navlink);
+                  // console.log(nav.navlink);
                   return (
                     // <div key={nav.navlink}>
                     <Popover>
@@ -265,13 +275,13 @@ export default function Header() {
                             {nav.link == undefined ? (
                               " "
                             ) : (
-                              <Link href={nav.link} className="p-3  text-lg font-semibold">
+                              <Link href={nav.link} className="p-3  text-lg font-semibold" onClick={handlehoverclose}>
                                 {nav.navlink}
                               </Link>
                             )}
 
-                            <Transition 
-                            show={popoverStates[nav.navlink]}
+                            <Transition
+                              show={popoverStates[nav.navlink]}
                             // appear={true}
                             //   enter="transition-opacity ease-in translate-y-0 duration-2000 delay-2000"
                             //   enterFrom="opacity-0 "
@@ -279,12 +289,12 @@ export default function Header() {
                             //   leave="transition-opacity duration-1500"
                             //   leaveFrom="opacity-100 "
                             //   leaveTo="opacity-0 translate-y-0 "
-                              >
+                            >
 
                               {
                                 nav.navlink === "FENTYxPUMA" ? ("") : (
                                   <div className="">
-                                    <Popover.Panel static className="fixed right-0 left-0 top-[110px] text-left">
+                                    <Popover.Panel static className="fixed right-0 left-0 top-[110px] text-left z-[99]">
                                       <div className="flex transfrom duration-700 translate-y-50">
                                         <div className="flex overflow-x-auto pl-[60px] pt-[30px] pb-[50px] bg-white  w-screen">
                                           {nav.menu &&
@@ -355,11 +365,11 @@ export default function Header() {
           <div className='flex  justify-end items-end ml-auto lg:ml-auto'>
             <div className="lg:hidden">
               <button onClick={SearchClick} className="m-4 mx-1 lg:m-5 p-2">
-            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                 </svg>
-                </button>
-                <div className={`z-50 w-full fixed top-0 left-0 ${Searchbar ? "block" : "hidden"}`} >
+              </button>
+              <div className={`z-50 w-full fixed top-0 left-0 ${Searchbar ? "block" : "hidden"}`} >
                 <Search />
               </div>
             </div>
@@ -392,8 +402,8 @@ export default function Header() {
             </button>
             <div className="hidden lg:block">
               <div className={`flex flex-col relative ${Open ? 'block' : 'hidden'}`}>
-                <div className="w-10 h-10 bg-white right-[25px] fixed rotate-45"></div>
-                <div className='absolute w-[340px] h-[350px] right-[5px] p-1 border border-slate-400  text-md text-black bg-white rounded'>
+                <div className="absolute w-10 h-10 bg-white right-[15px] rotate-45"></div>
+                <div className='absolute w-[320px] h-[350px] right-[5px] p-1 border border-slate-400  text-md text-black bg-white rounded-sm'>
                   <div className="flex flex-col justify-end items-start py-3">
                     <Link href='' className=" m-1 mx-4 my-1 p-1 border-b-2 w-[290px] border-slate-400 ">My Account</Link>
                     <Link href='' className=" m-1 mx-4 my-1 p-1 border-b-2 w-[290px] border-slate-400 ">Wishlist</Link>

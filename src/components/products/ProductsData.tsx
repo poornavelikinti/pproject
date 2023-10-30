@@ -2,7 +2,7 @@ import React from 'react'
 
 export const products=[
         {
-            "id": 1, "price": 109.95, "Dprice": "99", "prize": "Less than 100","color": "black", "activity": "Badminton", "size": "XL", "prodcuttype": "Bags-Backpack", "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", "pricetag": "-10%", "category": "Men's clothing", "image": [
+            "id": 1, "price": 109.95, "Dprice": "99", "prize": "Less than 100","color": "black", "activity": "Badminton", "size": "XL", "prodcuttype": "Bags-Backpack", "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops", "category": "Men's clothing", "image": [
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4r1NEof_wJVqQk68mUECFekcUp9CxSvcuw4aSoaBmEn057iYCBdcml-CzlPkMzzVxUsM&usqp=CAU",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCjR8j05JsX1aVYbBbfyMdEGl25DWD1EWSpw&usqp=CAU",
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxtpHgKUNaOg-sMj5J9LE90raIM7UqqYlTdw&usqp=CAU",

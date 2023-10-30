@@ -17,7 +17,7 @@ export default function Filter() {
     let [mobview, setmobview] = useState(false)
     return (
         <div className={`block z-40 ${closebtn ? "block" : "hidden"}`}>
-            <div className="w-full h-4/5 border bg-slate-300 border-l-black lg-hidden">
+            <div className="w-full h-4/5 border bg-slate-300 border-l-black lg:hidden">
                 <div className="flex justify-between items-center p-2 font-extrabold">
                     <h1 className="flex w-full p-2 text-md h-11 font-medium items-center text-black">Product Filters</h1>
                     <button>

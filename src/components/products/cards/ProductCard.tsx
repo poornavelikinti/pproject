@@ -10,7 +10,7 @@ import Filter from "./Filter";
 import Link from "next/link";
 import { products } from "../ProductsData";
 import CommonProductPage from "../../PLP/CommonProductPage";
-
+import { RxCross2 } from 'react-icons/rx'
 
 
 export default function ProductCard() {
@@ -28,10 +28,16 @@ export default function ProductCard() {
     const [closebtn, setclosebtn] = useState(true);
     const [Open, setOpen] = useState(false);
 
-  const togglesortDropdown = () => {
-    setOpen(!Open);
-  };
-  
+    const handleToggleDropdown = (type) => {
+              if(type=='category'){
+                setcatdropopen(!catdropopen)}else if(type =='producttype'){setprodropopen(!prodropopen)}else if(type =='prize'){setprizedropopen(!prizedropopen)}else if(type =='gender'){setgendropopen(!gendropopen)}else if(type =='size'){setsizedropopen(!sizedropopen)}else if(type =='color'){setcolordropopen(!colordropopen)}else if(type =='active'){setactivedropopen(!activedropopen)}else if(type ==''){setdiscountdropopen(!discountdropopen)}else if(type =='collaborations'){setcollabdropopen(!collabdropopen)
+              }
+    };
+
+    const togglesortDropdown = () => {
+        setOpen(!Open);
+    };
+
 
     const toggleDropdown = (dropdownType) => {
         // Closing dropdowns
@@ -61,11 +67,12 @@ export default function ProductCard() {
                 <p className="text-xs font-normal">Discount auto-applied to orders checkout</p>
             </div>
             <h1 className="text-xl font-bold font-serif m-2 lg:ms-10 p-5">WOMEN</h1>
+            <div className="sticky top-[118px] z-[15] bg-white">
             <div className="flex justify-between border border-t-gray-300 z-10 border-b-gray-300 items-center">
                 <div className="flex justify-center items-center m-1 z-10">
                     <div className="block lg:hidden z-10">
                         <button
-                            onClick={() => setIsOpen(!isOpen)}
+                            onClick={() => setIsOpen(isOpen)}
                             className="flex px-3 py-2 z-10 rounded text-black-500 hover:text-black-400"
                         >
                             <button onClick={() => setmobileview(!mobileview)}
@@ -76,6 +83,7 @@ export default function ProductCard() {
                     </div>
                     {!mobileview ? (
                         <div className={` lg:flex items-center ${isOpen ? "block" : "hidden"}`}>
+                            
                             <div className="ms-[40px] me-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
@@ -92,9 +100,12 @@ export default function ProductCard() {
                                     )}
                                 </button>
                                 {catdropopen && (
-                                    <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 text-black absolute m-2 lg:border lg:border-slate-300 z-40 lg:w-[200px] h-22 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                    <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 z-90  scrollbar-track-gray-100 text-black absolute m-2 lg:border lg:border-slate-300  lg:w-[200px] h-22 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                        <div className="flex justify-end items-center w-full text-right" onClick={()=>handleToggleDropdown('category')}>
+                                            <RxCross2 className="h-6 w-6 m-3"></RxCross2>
+                                        </div>
                                         {Array.from(new Set(products.map((product) => product.category))).map((category, index) => (
-                                            <div className="flex text-sm p-0.25 m-3 z-20 whitespace-nowrap" key={index}>
+                                            <div className="flex text-sm p-0.25 m-3 z-90 whitespace-nowrap" key={index}>
                                                 <input type="checkbox" value={category} className="w-5 h-5"></input>
                                                 <label className="ms-4">
                                                     {category}
@@ -113,15 +124,18 @@ export default function ProductCard() {
                                 </button>
                                 {prodropopen && (
                                     <div className="overflow-y-scroll scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 text-black absolute m-2 lg:border lg:border-slate-300 z-40 lg:w-[300px] h-22 p-1 flex flex-col text-md items-start bg-white font-bold">
-                                    {Array.from(new Set(products.map((product) => product.prodcuttype))).map((producttype, index) => (
-                                        <div className="flex text-sm p-0.25 m-3 z-20 whitespace-nowrap" key={index}>
-                                            <input type="checkbox" value={producttype} className="w-5 h-5"></input>
-                                            <label className="ms-4">
-                                                {producttype}
-                                            </label>
+                                        <div className="flex justify-end items-center w-full text-right" onClick={()=>handleToggleDropdown('producttype')}>
+                                            <RxCross2 className="h-6 w-6 m-3"></RxCross2>
                                         </div>
-                                    ))}
-                                </div>
+                                        {Array.from(new Set(products.map((product) => product.prodcuttype))).map((producttype, index) => (
+                                            <div className="flex text-sm p-0.25 m-3 z-20 whitespace-nowrap" key={index}>
+                                                <input type="checkbox" value={producttype} className="w-5 h-5"></input>
+                                                <label className="ms-4">
+                                                    {producttype}
+                                                </label>
+                                            </div>
+                                        ))}
+                                    </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
@@ -133,7 +147,9 @@ export default function ProductCard() {
                                 </button>
                                 {prizedropopen && (
                                     <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 text-black absolute lg:w-[250px] m-2 lg:border lg:border-slate-300 z-100 p-1 flex flex-col text-md items-start bg-white font-bold">
-                                        <div className="">
+                                            <div className="flex justify-end items-end w-full text-right" onClick={()=>handleToggleDropdown('prize')}>
+                                                <RxCross2 className="h-6 w-6 m-3"></RxCross2>
+                                            </div>
                                             {Array.from(new Set(products.map((product) => product.prize))).map((prize, index) => (
                                                 <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
                                                     <input type="radio" value={prize} className="w-5 h-5"></input>
@@ -142,7 +158,6 @@ export default function ProductCard() {
                                                     </label>
                                                 </div>
                                             ))}
-                                        </div> 
                                     </div>
                                 )}
                             </div>
@@ -154,14 +169,17 @@ export default function ProductCard() {
                                     }
                                 </button>
                                 {gendropopen && (
-                                    <div className=" text-black absolute lg:border lg:w-[150px] m-2 lg:border-slate-300 z-30 p-1 flex flex-col text-md items-start bg-white font-bold">
+                                    <div className=" text-black absolute lg:border lg:w-[150px] m-2 lg:border-slate-300 z-30 p-1 flex flex-col text-md bg-white font-bold">
+                                        <div className="flex justify-end items-center w-full text-right" onClick={()=>handleToggleDropdown('gender')}>
+                                            <RxCross2 className="h-6 w-6 m-3"></RxCross2>
+                                        </div>
                                         {Array.from(new Set(products.map((product) => product.gender))).filter(Boolean).map((gender, index) => (
                                             <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
-                                            <input type="radio" value={gender} className="w-5 h-5"></input>
-                                            <label className="ms-4">
-                                                {gender}
-                                            </label>
-                                        </div>
+                                                <input type="radio" value={gender} className="w-5 h-5"></input>
+                                                <label className="ms-4">
+                                                    {gender}
+                                                </label>
+                                            </div>
                                         ))}
                                     </div>
                                 )}
@@ -175,7 +193,10 @@ export default function ProductCard() {
                                 </button>
                                 {sizedropopen && (
                                     <div className=" text-black absolute lg:border lg:border-slate-300 z-20 m-2 p-1 flex text-md whitespace-nowrap max-w-xl w-auto bg-white font-bold">
-                                        {Array.from(new Set(products.map((product) => product.size))).filter(Boolean).map((size, index) => (
+
+                                        <div className="flex justify-end items-center w-full text-right" onClick={()=>handleToggleDropdown('size')}>
+                                            <RxCross2 className="h-6 w-6 m-3"></RxCross2>
+                                        </div>{Array.from(new Set(products.map((product) => product.size))).filter(Boolean).map((size, index) => (
                                             <div className="border w-full  border-slate-500 hover:border-black hover:bg-black hover:text-white p-1 m-1">
                                                 <div className="flex flex-row text-sm p-0.25 m-3 " key={index}>
                                                     <h1>
@@ -196,6 +217,9 @@ export default function ProductCard() {
                                 </button>
                                 {colordropopen && (
                                     <div className=" text-black absolute lg:border lg:border-slate-300 z-20 m-2 p-1 flex text-md items-start whitespace-nowrap w-auto bg-white font-bold">
+                                        <div className="flex justify-end items-center w-full text-right" onClick={()=>handleToggleDropdown('color')}>
+                                            <RxCross2 className="h-6 w-6 m-3"></RxCross2>
+                                        </div>
                                         {Array.from(new Set(products.map((product) => product.color))).filter(Boolean).map((color, index) => (
                                             <div className="flex flex-col items-center">
                                                 {color == "black" || color == "white" ? (
@@ -245,17 +269,20 @@ export default function ProductCard() {
                                 </button>
                                 {activedropopen && (
                                     <div className="overflow-auto scrollbar-width-thin scrollbar-thumb-gray-900 scrollbar-track-gray-100 max-h-[300px] text-black absolute lg:border lg:border-slate-300 z-20 m-2 p-1 flex flex-col text-md whitespace-nowrap max-w-xl w-auto bg-white font-bold">
-                                    {Array.from(new Set(products.map((product) => product.activity))).filter(Boolean).map((activity, index) => (
-                                        <div className="">
-                                            <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
-                                            <input type="radio" value={activity} className="w-5 h-5"></input>
-                                            <label className="ms-4">
-                                                {activity}
-                                            </label>
+                                        <div className="flex justify-end items-center w-full text-right" onClick={()=>handleToggleDropdown('active')}>
+                                            <RxCross2 className="h-6 w-6 m-3"></RxCross2>
                                         </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                        {Array.from(new Set(products.map((product) => product.activity))).filter(Boolean).map((activity, index) => (
+                                            <div className="">
+                                                <div className="flex text-md font-normal p-0.25 m-3 whitespace-nowrap" key={index}>
+                                                    <input type="radio" value={activity} className="w-5 h-5"></input>
+                                                    <label className="ms-4">
+                                                        {activity}
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 )}
                             </div>
                             <div className="relative block p-2 lg:inline-block ">
@@ -266,7 +293,8 @@ export default function ProductCard() {
                                     }
                                 </button>
                             </div>
-                        </div>
+                            </div>
+
                     ) : <Filter />}
 
                 </div>
@@ -276,14 +304,14 @@ export default function ProductCard() {
                         onClick={togglesortDropdown}
                         aria-expanded={Open}
                         data-te-ripple-init
-                        data-te-ripple-color="light">                   
+                        data-te-ripple-color="light">
                         SORT BY
                         <span className="ml-2 w-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
-                                className="h-5 w-5">                          
+                                className="h-5 w-5">
                                 <path
                                     fillRule="evenodd"
                                     d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
@@ -292,28 +320,29 @@ export default function ProductCard() {
                             </svg>
                         </span>
                     </button>
-                    <ul className={`absolute m-1 mt-0 ${Open ? 'block' : 'hidden'} z-20 list-none overflow-hidden rounded-lg w-[161px] border-none bg-white`}>                
+                    <ul className={`absolute m-1 mt-0 ${Open ? 'block' : 'hidden'} z-20 list-none overflow-hidden rounded-lg w-[161px] border-none bg-white`}>
                         <h6 className="block px-4 py-1 text-md font-semibold bg-sky-400">Sort by</h6>
                         <li>
                             <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Discount High to Low</Link>
                         </li>
                         <li>
-                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Best Matches</Link>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Best Matches</Link>
                         </li>
                         <li>
-                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Top Sellers</Link>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Top Sellers</Link>
                         </li>
                         <li>
-                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Prices Low to High</Link>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Prices Low to High</Link>
                         </li>
                         <li>
-                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Prices High to Low</Link>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Prices High to Low</Link>
                         </li>
                         <li>
-                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700"href="">Newest</Link>
+                            <Link className="block px-2 py-1 whitespace-nowrap text-md text-neutral-700" href="">Newest</Link>
                         </li>
                     </ul>
                 </div>
+            </div>
             </div>
             <CommonProductPage />
         </div>

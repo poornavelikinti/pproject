@@ -51,7 +51,7 @@ function HomeComponent() {
         },
     ]
     return (
-        <div>
+        <div className='overflow-hidden'>
             <div className='h-[80px] w-full flex justify-center items-center flex-col bg-blue-950 text-white'>
                 <h1 className='lg:font-bold font-semibold text-sm lg:text-lg'>EXTRA 15% OFF ON ORDERS ABOVE $3499</h1>
                 <p className='lg:text-sm text-xs'>Discount auto-applied at checkout</p>

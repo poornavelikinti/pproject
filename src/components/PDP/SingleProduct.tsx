@@ -9,6 +9,7 @@ import 'swiper/css/scrollbar'
 import 'swiper/css'
 
 function SingleProduct({ id }) {
+    // for selecting the crct id
     const params = useParams()
     console.log(params);
     const { category, subCategory } = params
@@ -62,10 +63,10 @@ function SingleProduct({ id }) {
                                         <div className='flex flex-row lg:flex-col'>
                                             <h1 className='my-5 lg:font-bold text-red-600 text-xl font-semibold lg:text-3xl'>${product.Dprice}</h1>
                                             <h1 className='lg:font-bold lg:text-2xl line-through lg:my-0 my-5 mx-5 lg:mx-0 font-semibold text-xl'>${product.price}</h1>
-                                            <p className='py-5 my-1 lg:my-0 text-slate-500 text-sm lg:text-lg font-thin'>Prices include GST</p>
+                                            <p className='py-5 my-1 lg:my-0 text-slate-500 text-sm font-thin'>Prices include GST</p>
                                         </div>
                                         <h1 className='font-bold text-2xl'>Color</h1>
-                                        <p className='lg:p-1 py-1 font-thin lg:font-normal text-sm lg:text-lg'>PUMA Brown-PUMA Black</p>
+                                        <p className='lg:p-1 py-1 font-thin lg:font-normal text-sm'>PUMA Brown-PUMA Black</p>
                                         <div className='lg:h-[80px] h-[60px]'>
 
                                         </div>

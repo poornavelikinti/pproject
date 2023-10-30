@@ -69,7 +69,7 @@ function CommonProductPage() {
             <div className="flex flex-wrap m-10 relative z-1  className='mb-[50px]'">
                 {products.map((product) => (
                     <>
-                        <Link key={product.id} href={`../../PDP/${product.id}`}>
+                        <Link key={product.id} href={`category/${product.id}`}>
                             <div className="m-3 mb-6 w-[375px] h-[375px]">
                                 {product && product.image && Array.isArray(product.image) && (
                                     <div className='relative'>
@@ -117,7 +117,6 @@ function CommonProductPage() {
                                         </div>
                                     </div>
                                 )}
-
                             </div>
                             <Link href='' className='m-3 font-light my-3'>1 COLOR</Link>
                             <div className="text-lg font-bold flex justify-between items-center h-20 mt-1 bg-white w-[375px] bottom-0 left-0">

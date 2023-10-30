@@ -6,10 +6,8 @@ import {BiChevronLeft} from "react-icons/bi"
 
 function Search() {
     let [closebtn, setclosebtn] = useState(true);
-    const [Searchbar, setSearchbar] = useState(false)
 
     const CloseClick = () => {
-        setSearchbar(false);
         setclosebtn(!closebtn);
     };
     return (
@@ -23,11 +21,11 @@ function Search() {
         leaveFrom="opacity-100 delay-2000"
         leaveTo="opacity-0 translate-y-full delay-2000"
         >
-        <div className='h-screen bg-white relative'>
+        <div className='h-screen bg-white relative lg:bg-transparent'>
             <div className='m-0 bg-gray-200'>
             <form>
-                <div className='flex lg:py-8 p-5 lg:mx-[90px] items-center'>
-                    <button onClick={CloseClick}>
+                <div className='flex lg:py-8 p-5 lg:mx-[50px] items-center'>
+                    <button onClick={CloseClick} className='lg:hidden'>
                 <BiChevronLeft className='w-8 h-8 text-black'></BiChevronLeft>
                 </button>
                     <div className="relative w-full">
@@ -44,7 +42,7 @@ function Search() {
                 </div>
             </form>
             </div>
-            <div className='w-full lg:h-2/4 h-full bg-white overflow-y-scroll'>
+            <div className='w-full lg:h-3/5 h-full bg-white overflow-y-scroll'>
                 <div className='text-black flex flex-col lg:flex-row font-bold text-xl mx-5 lg:mx-0 py-[30px] lg:px-[90px] w-full'>
                 <div className='flex flex-col lg:w-2/5'>
                 <h1 className='font-semibold lg:font-bold'>TRENDING SEARCHES</h1>
@@ -62,7 +60,7 @@ function Search() {
                 </div>
                 </div>
             </div>
-            <div className='hidden lg:block inset-0 bg-opacity-50 bg-black h-full'>
+            <div className='hidden lg:block bg-opacity-40 bg-black h-full'>
             </div>
         </div>
         </Transition>
